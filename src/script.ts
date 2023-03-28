@@ -1,8 +1,20 @@
 import {PrismaClient} from '@prisma/client';
-const prisma = new PrismaClient();
+const prisma = new PrismaClient({log: ['query']});
 
 async function main() {
-	const users = await prisma.user.deleteMany();
+	const users = await prisma.user.findMany({
+		where: {
+			name: {equals: 'Kyles'},
+		},
+		select: {
+			id: true,
+			role: true,
+			userPreference: {
+				select: {emailUpdates: true},
+			},
+		},
+	});
+
 	console.log(users);
 }
 

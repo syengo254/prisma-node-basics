@@ -25,7 +25,7 @@ model User {
 model UserPreference {
   id           Int     @id @default(autoincrement())
   emailUpdates Boolean
-  user         User    @relation(fields: [userId], references: [id], onUpdate: Cascade)
+  user         User    @relation(fields: [userId], references: [id], onUpdate: Cascade, onDelete: Cascade)
   userId       Int     @unique
 }
 
